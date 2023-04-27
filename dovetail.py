@@ -22,9 +22,10 @@ if __name__ == "__main__":
     while True:
         t = random_size()
         with open("task_queue.py") as f:
-            tasks = eval(f.read(), {'INF':999999999})
+            tasks = eval(f.read(), {'INF':999999999, 'UNK':(0,0)})
         task = find_next_task(tasks, done_tasks, t)
         if task is None:
             done_tasks = set()
             task = find_next_task(tasks, done_tasks, t)
+        done_tasks.add(task)
         do_task(task, t)
